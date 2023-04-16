@@ -1,0 +1,19 @@
+networks:
+  default:
+    name: react-demo_network
+volumes:
+  frontend-app-node-modules-volume:
+  frontend-app-dist-volume:
+services:
+  frontend-app:
+    build:
+      context: frontend-app
+      args:
+        APP_ROOT: $APP_ROOT
+    ports:
+      - 5173:5173
+    container_name: frontend-app
+    volumes:
+      - ./frontend-app:$APP_ROOT
+      - frontend-app-node-modules-volume:${APP_ROOT}/node_modules
+      - frontend-app-dist-volume:${APP_ROOT}/dist
