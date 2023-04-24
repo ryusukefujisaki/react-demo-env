@@ -4,6 +4,7 @@ networks:
 volumes:
   frontend-app-node-modules-volume:
   frontend-app-dist-volume:
+  backend-app-node-modules-volume:
   create-react-app-node-modules-volume:
   create-react-app-build-volumes:
 services:
@@ -19,6 +20,17 @@ services:
       - ./frontend-app:$APP_ROOT
       - frontend-app-node-modules-volume:${APP_ROOT}/node_modules
       - frontend-app-dist-volume:${APP_ROOT}/dist
+  backend-app:
+    build:
+      context: backend-app
+      args:
+        APP_ROOT: $APP_ROOT
+    ports:
+      - 10081:3000
+    container_name: backend-app
+    volumes:
+      - ./backend-app:$APP_ROOT
+      - backend-app-node-modules-volume:${APP_ROOT}/node_modules
   create-react-app:
     build:
       context: create-react-app
