@@ -2,9 +2,6 @@
 
 set -eux
 
-# Uninstall old versions
-sudo apt-get remove docker docker.io containerd runc
-
 # Set up the repository
 sudo apt-get update
 sudo apt-get install -y ca-certificates curl gnupg
@@ -24,7 +21,7 @@ sudo apt-get install -y \
 sudo curl -L "https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-$(uname -s)-$(uname -m)" \
      -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
-sudo chmod +rw /var/run/docker.sock
+sudo gpasswd -a vagrant docker
 
 # Up
 docker-compose -f /home/vagrant/react-demo-env/docker-compose.yml build --no-cache
