@@ -17,6 +17,9 @@ services:
     ports:
       - 5173:5173
     container_name: frontend-app
+    environment:
+      VITE_BACKEND_HOST: $VITE_BACKEND_HOST
+      VITE_BACKEND_PORT: $VITE_BACKEND_PORT
     volumes:
       - ./frontend-app:$APP_ROOT
       - frontend-app-node-modules-volume:${APP_ROOT}/node_modules
